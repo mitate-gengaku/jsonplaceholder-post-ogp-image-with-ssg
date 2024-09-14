@@ -23,6 +23,7 @@ export default async function handler(
 
   ctx.fillText(title ?? "", 500, 100);
   const url = canvas.toDataURL("image/png");
+  const image = url.split(";base64,").pop();
   
-  res.status(200).json(url);
+  res.status(200).json(image ?? "".toString());
 }
