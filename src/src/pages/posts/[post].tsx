@@ -88,13 +88,13 @@ export const getStaticProps = async ({ params }: {
   ctx.textAlign = 'center';
 
   ctx.fillText(params.post, 500, 100);
-  const url = canvas.toDataURL("image/png");
+  // const url = canvas.toDataURL("image/png");
 
   return {
     props: {
       url: process.env.BASE_URL + `posts/${params.post}`,
       post: data,
-      imgUrl: url,
+      imgUrl: process.env.BASE_URL + 'api/image?title=' + params.post
     }
   }
 }
