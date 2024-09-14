@@ -6,13 +6,12 @@ export const config = {
 };
  
 export default async function handler() {
-  const res = await fetch("http://localhost:3000/api/image", {
+  const res = await (await fetch("http://localhost:3000/api/image", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json;charset=utf-8"
     }
-  });
-  const data: string = await res.json();
+  })).json();
 
   return new ImageResponse(
     (
@@ -30,7 +29,7 @@ export default async function handler() {
           display: "flex"
         }}
       >
-        <Image src={data} alt="" width={1200} height={630} />
+        <Image src={res.data} alt="alt" width={1200} height={630} />
       </div>
     ),
     {
