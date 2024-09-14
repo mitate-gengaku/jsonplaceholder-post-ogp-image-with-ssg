@@ -94,7 +94,7 @@ export const getStaticProps = async ({ params }: {
     props: {
       url: process.env.BASE_URL + `posts/${params.post}`,
       post: data,
-      imgUrl: process.env.BASE_URL + 'api/image?title=' + params.post
+      imgUrl: process.env.BASE_URL + 'api/og'
     }
   }
 }
