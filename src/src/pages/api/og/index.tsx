@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ImageResponse } from "next/og";
  
 export const config = {
@@ -6,13 +5,6 @@ export const config = {
 };
  
 export default async function handler() {
-  const res = await (await fetch("http://localhost:3000/api/image", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=utf-8"
-    }
-  })).json();
-
   return new ImageResponse(
     (
       <div
@@ -26,10 +18,9 @@ export default async function handler() {
           textAlign: 'center',
           justifyContent: 'center',
           alignItems: 'center',
-          display: "flex"
         }}
       >
-        <Image src={res.data} alt="alt" width={1200} height={630} />
+        👋 Hello 你好 नमस्ते こんにちは สวัสดีค่ะ 안녕 добрий день Hallá
       </div>
     ),
     {
