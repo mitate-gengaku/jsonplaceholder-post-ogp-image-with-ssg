@@ -14,8 +14,8 @@ function splitStringIntoChunks(str: string, chunkSize = 7) {
 }
 
 export default async function handler() {
-  const fontUrl = new URL("../../../../public/ShipporiMincho-Bold.woff2", import.meta.url)
-  const fontData = await (await fetch(fontUrl)).arrayBuffer()
+  // const fontUrl = new URL("../../../../public/ShipporiMincho-Bold.woff2", import.meta.url)
+  // const fontData = await (await fetch(fontUrl)).arrayBuffer()
 
   const title = "我これより航空戦の指揮を";
   const author = "宮沢賢治";
@@ -28,10 +28,7 @@ export default async function handler() {
         tw="w-full h-full flex justify-center bg-white relative py-12 px-16"
         >
         <div
-          tw="w-[369px] h-[534px] mx-auto my-0 p-10 flex flex-row-reverse bg-slate-200 text-[32px] leading-[1.1] rounded-xl"
-          style={{  
-            fontFamily: "ShipporiMincho"
-          }}
+          tw="w-[369px] h-[534px] mx-auto my-0 p-10 flex flex-row-reverse bg-slate-200 text-[32px] leading-[1.1] rounded-xl font-shippori-mincho"
           >
           {titles.map((title, i) => (
             <div
@@ -95,13 +92,6 @@ export default async function handler() {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        {
-          name: "ShipporiMincho",
-          data: fontData,
-          style: 'normal'
-        }
-      ]
     },
   );
 }
