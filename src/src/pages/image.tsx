@@ -1,57 +1,42 @@
-import { cn } from "@/lib/utils";
-import { ImageResponse } from "next/og";
- 
-export const config = {
-  runtime: 'edge',
-};
-
-function splitStringIntoChunks(str: string, chunkSize = 7) {
-  const chunks = [];
-  for (let i = 0; i < str.length; i += chunkSize) {
-    chunks.push(str.slice(i, i + chunkSize));
-  }
-  return chunks;
-}
-
-export default async function handler() {
-  const fontUrl = new URL("../../../../public/Shippori_Mincho/ShipporiMincho-Bold.ttf", import.meta.url)
-  const fontData = await (await fetch(fontUrl)).arrayBuffer()
+const ImagePage = () => {
+  let tmp: string[] = [];
 
   const title = "我これより航空戦の指揮を";
   const author = "宮沢賢治";
 
-  const titles = splitStringIntoChunks(title).map((v) => v.split(""))
+  const splited = title.split("")
+  const titles = splited.map((char, i) => {
+    tmp.push(char)
 
-  return new ImageResponse(
-    (
+    if(i === 6 || i === splited.length - 1) {
+      const copy = [...tmp]
+      tmp = [];
+      return copy;
+    }
+  }).filter((v) => v?.length) as string[][];
+
+  return (
+    <div
+      className="w-[1200px] h-[630px]"
+      >
       <div
-        tw="w-full h-full flex justify-center bg-white relative py-12 px-16"
+        className="w-full h-full flex justify-center bg-white relative py-12 px-16"
         >
         <div
-          tw="w-[369px] h-[534px] mx-auto my-0 p-10 flex flex-row-reverse bg-slate-200 text-[32px] leading-[1.1] rounded-xl"
-          style={{  
-            fontFamily: "ShipporiMincho"
-          }}
+          className="w-[369px] h-[534px] mx-auto my-0 p-10 flex flex-row-reverse bg-slate-200 text-[32px] leading-[1.1] font-shippori-mincho rounded-xl"
           >
           {titles.map((title, i) => (
             <div
-              tw="flex flex-col justify-start text-[64px] leading-[1] font-bold"
+              className="flex flex-col text-[64px] leading-[1] font-bold"
               key={i}
               >
-              {[...(new Array(7))].map((_, index) => (
-                <span
-                  tw={cn(
-                    !title[index] && "text-transparent"
-                  )}
-                  key={index}
-                  >
-                  {title[index] ? title[index] : "あ"}
-                </span>
+              {title.map((char, index) => (
+                <span key={index}>{char}</span>
               ))}
             </div>
           ))}
           <p
-            tw="mt-6 mr-auto flex flex-col font-bold text-gray-500"
+            className="mt-6 mr-auto flex flex-col font-bold text-gray-500"
             >
             {author.split("").map((char, i) => (
               <span
@@ -91,17 +76,8 @@ export default async function handler() {
             <path d="M11.0731 14.8333C11.0731 14.8333 5.26176 12.5 3.71206 15.6111C2.16237 18.7222 7.58631 19.5 11.0731 19.8888C15.5843 20.392 15.8964 13.6516 20.3713 12.8888C23.7067 12.3203 29 14.8333 29 14.8333" stroke="#00A48D" strokeWidth="0.5"/>
         </svg>
       </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: "ShipporiMincho",
-          data: fontData,
-          style: 'normal'
-        }
-      ]
-    },
-  );
+    </div>
+  )
 }
+
+export default ImagePage;

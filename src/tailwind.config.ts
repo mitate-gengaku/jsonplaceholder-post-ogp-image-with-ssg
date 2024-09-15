@@ -62,6 +62,7 @@ const config: Config = {
         mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
         "noto-sans": ['var(--font-noto-sans)'],
         yumin: ['"YuMincho"', '"游明朝"', 'serif'],
+        "shippori-mincho": ['var(--font-shippori-mincho)'],
       }
   	}
   },
