@@ -14,7 +14,7 @@ function splitStringIntoChunks(str: string, chunkSize = 7) {
 }
 
 export default async function handler() {
-  const fontUrl = new URL("../../../../public/Shippori_Mincho/ShipporiMincho-Bold.ttf", import.meta.url)
+  const fontUrl = new URL("../../../../public/ShipporiMincho-Bold.ttf", import.meta.url)
   const fontData = await (await fetch(fontUrl)).arrayBuffer()
 
   const title = "我これより航空戦の指揮を";
